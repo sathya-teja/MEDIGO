@@ -1,6 +1,8 @@
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import userModel from '../models/userModel.js';
+import doctorModel from '../models/doctorModel.js';
+import appointmentModel from '../models/appointmentModel.js';
 import jwt from 'jsonwebtoken';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -133,8 +135,11 @@ const userId = req.userId;
 const bookAppointment = async (req, res) => {
     try {
 
-        const { userId, docId ,slotDate, slotTime} = req.body;
-
+        const {  docId ,slotDate, slotTime} = req.body;
+        const userId = req.userId;
+        // console.log(req.userId); 
+        // console.log(userId, docId, slotDate, slotTime);
+        
         const docData = await doctorModel.findById(docId).select('-password');
 
         if (!docData.available) {
