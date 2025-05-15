@@ -1,10 +1,20 @@
 import { createContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { useState } from "react";
 
 export const DoctorContext= createContext()
 
 const DoctorContextProvider=(props)=>{
-    const value={
 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+    const [dToken,setDToken] = useState(localStorage.getItem('dToken') ? localStorage.getItem('dToken') : '')
+
+
+    const value={
+        dToken,setDToken,
+        backendUrl
     }
     return(
         <DoctorContext.Provider value={value}>
