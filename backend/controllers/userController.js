@@ -192,6 +192,65 @@ const bookAppointment = async (req, res) => {
     }
 }
 
+// API to get user appointemnts for frontend my-appointments page
+const listAppointment=async(req,res)=>{
+    try {
+        
+        const userId=req.userId
+        const appointments=await appointmentModel.find({userId})
+        res.json({success:true,appointments})
+        console.log(appointments);
 
 
-export { registerUser, loginUser ,getProfile, updateProfile, bookAppointment};
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+
+// API to cancel Appointment
+const cancelAppointment = async (req, res) =>{
+
+    try {
+
+        const {appointmentId} = req.body;
+        const userId = req.userId;
+
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+        
+        // verify appointment user
+        if (appointmentData.userId !== userId) {
+            return res.json({ success: false, message: "Unauthorized action" });
+            
+        }
+
+        await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true});
+
+        // releasing doctors slot
+
+        const {docId, slotDate, slotTime} = appointmentData;
+
+        const doctorData = await doctorModel.findById(docId)
+
+        let slots_booked = doctorData.slots_booked;
+
+        slots_booked[slotDate] = slots_booked[slotDate].filter(e => e !== slotTime);
+
+        await doctorModel.findByIdAndUpdate(docId, {slots_booked})
+
+        res.json({ success: true, message: "Appointment cancelled successfully" });
+
+        
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+        
+    }
+
+}
+// once the appoitmentlist is ready this cancel appointment API will be uncommented
+// then export the function
+
+export { registerUser, loginUser ,getProfile, updateProfile, bookAppointment,listAppointment,cancelAppointment};
