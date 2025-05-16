@@ -8,6 +8,7 @@ import RelatedDoctors from '../components/RelatedDoctors'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 
+
 const Appointment = () => {
   const { docId } = useParams()
   const { doctors, currencySymbol, backendUrl , token,getDoctorsData } = useContext(AppContext)
@@ -25,8 +26,9 @@ const Appointment = () => {
   }
 
   const getAvailableSlots = async () => {
+    if (!docInfo) return;
     setDocSlots([])
-
+    
     // Getting current date
     let today = new Date()
 
@@ -59,6 +61,8 @@ const Appointment = () => {
 
         const slotDate = day + "_" + month + "_" + year
         const slotTime = formattedTime
+        
+        
 
         const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true
 
@@ -120,9 +124,13 @@ const bookAppointment = async () => {
 
 
 
-  useEffect(() => {
-    fetchDocInfo()
-  }, [doctors, docId])
+useEffect(() => {
+  const fetch = async () => {
+    await fetchDocInfo()
+  }
+  fetch()
+}, [doctors, docId])
+
 
   useEffect(() => {
     getAvailableSlots()

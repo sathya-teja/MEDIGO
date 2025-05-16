@@ -28,3 +28,33 @@
 .active p{
     @apply text-white bg-primary
   }
+
+
+ @media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .printable, .printable * {
+    visibility: visible;
+  }
+
+  .printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+
+
+  .printable p, .printable div {
+    page-break-inside: avoid;
+  }
+}

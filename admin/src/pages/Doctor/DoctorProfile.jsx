@@ -4,6 +4,7 @@ import { DoctorContext } from '../../contexts/DoctorContext'
 import { AppContext } from '../../contexts/AppContext'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const DoctorProfile = () => {
 
@@ -11,6 +12,8 @@ const DoctorProfile = () => {
   const { currency } = useContext(AppContext)
 
   const [isEdit, setIsEdit] = useState(false)
+
+ 
 
   const updateProfile=async()=>{
     try {
@@ -42,18 +45,20 @@ const DoctorProfile = () => {
 
   }, [dToken])
 
+
+
   return profileData && (
     <div>
       <div className='flex flex-col gap-4 m-5'>
         <div>
-          <img className='bg-purple-600 w-full sm:max-w-64 rounded-lg' src={profileData.image} alt="" />
+          <img className='max-w-42 bg-purple-600 w-full sm:max-w-64 rounded-lg' src={profileData.image} alt="" />
         </div>
         {/** doc info:name , degree and information.. */}
         <div className='flex-1 border border-stone-100 rounded-lg p-8 py-7  bg-white'>
           <p className='flex items-center gap-2 text-3xl font-medium text-gray-700'>{profileData.name}</p>
           <div className='flex items-center gap-2 mt-1 text-gray-600'>
-            <p>{profileData.degree}-{profileData.speciality}</p>
-            <button className='py-0.5 px-2 border text:xs rounded-full'>{profileData.experience}</button>
+            <p>{profileData.degree} - {profileData.speciality}</p>
+            <button className='py-0.5 px-2 border text-xs rounded-full'>{profileData.experience}</button>
           </div>
           {/**  ---- doctor about ----- */}
           <div>
@@ -63,11 +68,15 @@ const DoctorProfile = () => {
             </p>
           </div>
           <p className='text-gray-600 font-medium mt-4'>
-            Appointment fee:<span className='text-gray-800'>{currency}{isEdit ? <input type="number" onChange={(e) => setProfileData(prev = ({ ...prev, fees: e.target.value }))} value={profileData.fees} /> : profileData.fee}</span>
+            Appointment fee:<span className='text-gray-800'>{currency}{isEdit ? <input type="number" onChange={(e) => setProfileData(prev => ({ ...prev, fees: e.target.value }))} value={profileData.fees} /> : profileData.fees}</span>
           </p>
           <div className='flex gap-2 py-2'>
             <p >Address:</p>
-            
+            <p className='text-sm text-gray-600'>
+              {isEdit ? <input type='text' onChange={(e)=>setProfileData(prev => ({...prev,address:{...prev.address,line1:e.target.value}}))} value={profileData.address.line1}></input> : profileData.address.line1}
+              <br />
+              {isEdit ? <input type='text' onChange={(e)=>setProfileData(prev => ({...prev,address:{...prev.address,line2:e.target.value}}))} value={profileData.address.line2}></input> : profileData.address.line2}
+            </p>
 
           </div>
 
@@ -79,7 +88,7 @@ const DoctorProfile = () => {
           {
             isEdit
             ?
-            <button onClick={updateProfile} className='px-4 py-1 border border-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all'>Save</button>
+            <button onClick={updateProfile} className='px-4 py-1 border border-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all cursor-pointer'>Save</button>
 
             :
              <button onClick={() => setIsEdit(true)} className='px-4 py-1 border border-primary text-sm rounded-full mt-5 hover:bg-primary hover:text-white transition-all'>Edit</button>
