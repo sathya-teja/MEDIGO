@@ -17,9 +17,7 @@ const Doctors = () => {
           (doc) => doc.speciality.toLowerCase() === speciality.toLowerCase()
         )
       );
-      console.log(doctors.filter((doc) => doc.speciality === speciality));
-      console.log(speciality);
-      console.log(doctors.map((doc) => doc.speciality));
+
     } else {
       setFilterDoc(doctors);
     }

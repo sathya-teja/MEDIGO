@@ -104,7 +104,7 @@ const bookAppointment = async () => {
     let year=date.getFullYear()
 
     const slotDate = day + "_" + month + "_" + year
-    console.log({ docId, slotDate, slotTime, token })
+    
 
     const {data} = await axios.post(backendUrl + '/api/user/book-appointment', {docId, slotDate, slotTime},{headers:{token}} )
     if(data.success){
@@ -137,8 +137,7 @@ useEffect(() => {
   }, [docInfo])
 
   useEffect(() => {
-    console.log(docSlots)
-    console.log(docSlots.length)
+    
   }, [docSlots])
 
   return docInfo && (

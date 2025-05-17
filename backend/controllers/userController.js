@@ -200,7 +200,7 @@ const listAppointment=async(req,res)=>{
         const userId=req.userId
         const appointments=await appointmentModel.find({userId})
         res.json({success:true,appointments})
-        console.log(appointments);
+        
 
 
     } catch (error) {
