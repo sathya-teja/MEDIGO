@@ -34,7 +34,7 @@ const Doctors = () => {
       <p className="text-gray-600">
         Browse through the doctors specialisation.
       </p>
-      <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
+      <div className="flex flex-col sm:flex-row items-start gap-5 mt-5 ">
         <button
           onClick={() => setShowFilter((prev) => !prev)}
           className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${
@@ -45,12 +45,12 @@ const Doctors = () => {
         </button>
         <div
           className={`flex-col gap-4 text-sm text-gray-600 ${
-            showFilter ? "flex" : "hidden sm:block"
+            showFilter ? "flex" : "hidden sm:block gap-1"
           }`}
         >
           <p
             onClick={() =>
-              speciality === "General Physician"
+              speciality === "General physician"
                 ? navigate("/doctors")
                 : navigate("/doctors/General physician")
             }
@@ -125,7 +125,7 @@ const Doctors = () => {
             Gastroenterologist
           </p>
         </div>
-        <div className="w-full grid grid-cols-auto gap-4  gap-y-6 ">
+        <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4  gap-y-6 "> {/* orientation of doctors list */ }
           {filterDoc.map((item, index) => (
             <div
               onClick={() => navigate(`/appointment/${item._id}`)}

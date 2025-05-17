@@ -109,10 +109,37 @@ useEffect(()=>{
               </div>
               <div></div>
               <div className='flex flex-col gap-2 justify-end'>
-                {!item.cancelled &&  <button onClick={()=>appointmentRazorpay(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>}
-                {!item.cancelled && <button onClick={()=> cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel appointment</button>}
-                {item.cancelled && <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment cancelled</button>}
-              </div>
+  {/* Show Pay and Cancel buttons only if not cancelled and not completed */}
+  {!item.cancelled && !item.isCompleted && (
+    <>
+      <button
+        onClick={() => appointmentRazorpay(item._id)}
+        className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>
+        Pay Online
+      </button>
+      <button
+        onClick={() => cancelAppointment(item._id)}
+        className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>
+        Cancel appointment
+      </button>
+    </>
+  )}
+
+  {/* Show Cancelled button only if appointment is cancelled */}
+  {item.cancelled && (
+    <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>
+      Appointment cancelled
+    </button>
+  )}
+
+  {/* Show Completed button only if appointment is completed and NOT cancelled */}
+  {!item.cancelled && item.isCompleted && (
+    <button className='sm:min-w-48 py-2 border border-green-500 rounded text-green-500'>
+      Appointment completed
+    </button>
+  )}
+</div>
+
             </div>
           ))
         }

@@ -116,7 +116,7 @@ const AddDoctor = () => {
                         <div className='flex-1 flex-col gap-1'>
                             <p>Speciality</p>
                             <select onChange={(e) => setSpeciality(e.target.value)} value={speciality} className='border rounded border-gray-200 px-3 py-2 w-full'>
-                                <option value="General Physician">General Physician</option>
+                                <option value="General physician">General Physician</option>
                                 <option value="Gynecologist">Gynecologist</option>
                                 <option value="Dermatologist">Dermatologist</option>
                                 <option value="Pediatrician">Pediatrician</option>

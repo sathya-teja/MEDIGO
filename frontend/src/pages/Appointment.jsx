@@ -157,7 +157,7 @@ useEffect(() => {
           </p>
           <div className='flex items-center gap-2 text-sm text-gray-600 mt-1'>
             <p>{docInfo.degree} - {docInfo.speciality}</p>
-            <button className='py-0.5 px-2 border text-xs rounded-full'>{docInfo.experience}</button>
+            <button className='py-0.5 px-2 border text-xs rounded-full '>{docInfo.experience}</button>
           </div>
           
           {/* ---------Doctor About----------- */}

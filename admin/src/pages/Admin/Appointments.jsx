@@ -68,7 +68,7 @@ const AllAppointments = () => {
               />
               <p>{item.userData.name}</p>
             </div>
-            <p className="max-sm:hidden">{calculateAge(item.userData.dob)}</p>
+            <p className="max-sm:hidden">{calculateAge(item.userData.dob) }</p>
             <p>
               {slotDateFormat(item.slotDate)}, {item.slotTime}
             </p>
