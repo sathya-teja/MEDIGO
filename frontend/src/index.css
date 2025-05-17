@@ -6,13 +6,12 @@
 }
 
 @theme {
-  --color-primary: #5f6FFF;
+  --color-primary:  #6b21a8;
 
 }
 @theme {
   --grid-template-columns-auto: repeat(auto-fill, minmax(200px, 1fr));
 }
-
 
 
 
