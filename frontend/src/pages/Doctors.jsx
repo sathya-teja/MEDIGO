@@ -43,6 +43,7 @@ const Doctors = () => {
         >
           Filters
         </button>
+        
         <div
           className={`flex-col gap-4 text-sm text-gray-600 ${
             showFilter ? "flex" : "hidden sm:block gap-1"
