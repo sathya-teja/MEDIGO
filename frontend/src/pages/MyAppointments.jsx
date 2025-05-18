@@ -13,6 +13,8 @@ const {backendUrl,token,getDoctorsData}=useContext(AppContext)
 
 const [appointments,setAppointments]=useState([])
 
+const navigate=useNavigate()
+
 const months = [" ","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const slotDateFormat = (slotDate) => {
@@ -95,7 +97,8 @@ useEffect(()=>{
       <div>
         {
           appointments.map((item, index) => (
-            <div className='grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b border-b-zinc-300' key={index} >
+            // <<<<<<<<  ONCLICK NAVIGATE FUNTION ADDED FOR ACCESSING DOCTOR APPOINTMENT PAGE>>>>>>>>>>>>>
+            <div onClick={()=> navigate(`/appointment/${item.docData._id}`)} className='cursor-pointer grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b border-b-zinc-300' key={index} >
               <div>
                 <img className='w-32 bg-indigo-50' src={item.docData.image} alt="" />
               </div>

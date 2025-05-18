@@ -3,6 +3,7 @@ import { assets } from '../../assets/assets';
 import { AdminContext } from '../../contexts/AdminContext';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+
 const AddDoctor = () => {
 
     const [docImg, setDocImg] = useState(false)

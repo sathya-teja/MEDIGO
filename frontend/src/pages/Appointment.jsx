@@ -78,7 +78,10 @@ const Appointment = () => {
         // Incrementing 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30)
       }
-      setDocSlots(prev => ([...prev, timeSlots]))
+      // setDocSlots(prev => [...prev, timeSlots]);  <<<-------------------- if any issue in dateslots use this original code------------------------>>>
+      if (timeSlots.length) {                         
+      setDocSlots(prev => [...prev, timeSlots]);
+    }
     }
   }
 
@@ -201,7 +204,7 @@ useEffect(() => {
           ))}
         </div>
 
-        <button onClick={bookAppointment} className='bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6'>
+        <button onClick={bookAppointment} className='bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>
           Book appointment
         </button>
       </div>

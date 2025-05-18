@@ -11,16 +11,16 @@ const Footer = () => {
             {/* Left Section */}
             <div>
                 <img className='mb-5 w-40' src={assets.logo} alt="" />
-                <p className='w-full md:w-2/3 text-gray-600 leading-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur suscipit autem quos eum quibusdam architecto odit officiis, optio magnam saepe error aliquam fuga voluptatum illo molestias itaque voluptates. Voluptates, officia!</p>
+                <p className='w-full md:w-2/3 text-gray-600 leading-6'>MEDIGO – Your trusted companion for hassle‑free healthcare. Search, compare, and book appointments with verified doctors and clinics in seconds, get instant confirmations, and manage all your visits from one secure dashboard. Better care starts here.</p>
             </div>
             {/* Center Section */}
             <div>
                 <p className='text-xl font-medium mb-5'>COMPANY</p>
                 <ul className='flex flex-col gap-2 text-gray-600 cursor-pointer'>
-                    <li onClick={navigate} >Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li>Privacy policy</li>
+                    <li onClick={() => navigate('/')} >Home</li>
+                    <li onClick={() => navigate('/about')}>About Us</li>
+                    <li onClick={() => navigate('/contact')}>Contact Us</li>
+                    <li onClick={() => navigate('/')}>Privacy policy</li>
                 </ul>
             </div>
             {/* Right Section */}
