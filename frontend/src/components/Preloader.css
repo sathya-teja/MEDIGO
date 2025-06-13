@@ -1,0 +1,29 @@
+#preloader{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;         /* adapt to theme */
+  z-index:9999;
+  transition:opacity .4s ease;
+}
+#preloader.hide{           /* not used now, kept for extensibility */
+  opacity:0; pointer-events:none;
+}
+
+.spinner{
+  width:64px; height:64px;
+  animation:rotate 2s linear infinite;
+}
+.path{
+  stroke:#1c1577;          /* teal‑600 – change to brand color */
+  stroke-linecap:round;
+  animation:dash 1.5s ease-in-out infinite;
+}
+@keyframes rotate{ 100%{ transform:rotate(360deg);} }
+@keyframes dash{
+  0%  { stroke-dasharray:1,150;  stroke-dashoffset:0; }
+  50% { stroke-dasharray:90,150; stroke-dashoffset:-35;}
+  100%{ stroke-dasharray:90,150; stroke-dashoffset:-124;}
+}

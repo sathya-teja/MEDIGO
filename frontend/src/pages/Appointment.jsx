@@ -9,7 +9,10 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 
 
+
 const Appointment = () => {
+  // ?loader
+  
   const { docId } = useParams()
   const { doctors, currencySymbol, backendUrl , token,getDoctorsData } = useContext(AppContext)
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
