@@ -38,7 +38,7 @@ const Login = () => {
     }
   };
 
-  // ✅ Don't navigate until token is confirmed
+  // ✅ redirect only after token is verified
   useEffect(() => {
     if (authLoaded && token) {
       navigate('/');

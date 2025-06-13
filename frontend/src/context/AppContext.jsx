@@ -6,27 +6,31 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const currencySymbol = "₹";
-  const [token, setToken] = useState(null);              // ✅ use null instead of false
-  const [authLoaded, setAuthLoaded] = useState(false);   // ✅ tracks if token is loaded
+  const [token, setToken] = useState(null);
+  const [authLoaded, setAuthLoaded] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [userData, setUserData] = useState(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const loadUserProfileData = async () => {
+  const loadUserProfileData = async (storedToken) => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/user/get-profile`, {
-        headers: { token },
+        headers: { token: storedToken },
       });
 
       if (data.success) {
         setUserData(data.userData);
+        setToken(storedToken); // ✅ token only set after success
       } else {
-        toast.error(data.message);
+        throw new Error(data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      localStorage.removeItem("token");
+      setToken(null);
+      setUserData(false);
+    } finally {
+      setAuthLoaded(true); // ✅ always fire
     }
   };
 
@@ -44,27 +48,17 @@ const AppContextProvider = (props) => {
     }
   };
 
-  // ✅ Load token only once on mount
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+
     if (storedToken && storedToken !== "false") {
-      setToken(storedToken);
+      loadUserProfileData(storedToken); // ✅ validate token before accepting
     } else {
       setToken(null);
+      setAuthLoaded(true);
     }
-    setAuthLoaded(true);
   }, []);
 
-  // ✅ Load user data only if token exists
-  useEffect(() => {
-    if (token) {
-      loadUserProfileData();
-    } else {
-      setUserData(false);
-    }
-  }, [token]);
-
-  // ✅ Load doctors once regardless of token
   useEffect(() => {
     getDoctorsData();
   }, []);
@@ -79,7 +73,7 @@ const AppContextProvider = (props) => {
     userData,
     setUserData,
     loadUserProfileData,
-    authLoaded,              // ✅ expose this to Login
+    authLoaded,
   };
 
   return (
