@@ -87,15 +87,15 @@ const Doctors = () => {
           </p>
           <p
             onClick={() =>
-              speciality === "Pediatricians"
+              speciality === "Pediatrician"
                 ? navigate("/doctors")
-                : navigate("/doctors/Pediatricians")
+                : navigate("/doctors/Pediatrician")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Pediatricians" ? "bg-indigo-100 text-black" : ""
+              speciality === "Pediatrician" ? "bg-indigo-100 text-black" : ""
             }`}
           >
-            Pediatricians
+            Pediatrician
           </p>
           <p
             onClick={() =>
@@ -111,12 +111,12 @@ const Doctors = () => {
           </p>
           <p
             onClick={() =>
-              speciality === "Gastroenterologist"
+              speciality === "Gastroentrologist"
                 ? navigate("/doctors")
-                : navigate("/doctors/Gastroenterologist")
+                : navigate("/doctors/Gastroentrologist")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-              speciality === "Gastroenterologist"
+              speciality === "Gastroentrologist"
                 ? "bg-indigo-100 text-black"
                 : ""
             }`}
